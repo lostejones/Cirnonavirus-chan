@@ -19,3 +19,8 @@ dependencies {
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
+
+// fix Cp1252 issue on Windows builds
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
