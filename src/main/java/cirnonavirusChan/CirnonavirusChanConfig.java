@@ -3,16 +3,28 @@ package cirnonavirusChan;
 import java.util.Properties;
 
 public class CirnonavirusChanConfig {
-    private final long channelId;
+    private final long loadChannelId;
+    private final long helloChannelId;
+    private final long goodbyeChannelId;
     private final String discordToken;
 
     public CirnonavirusChanConfig(Properties prop) {
-        this.channelId = Long.parseLong(prop.getProperty("channelId"));
+        this.loadChannelId = Long.parseLong(prop.getProperty("loadChannelId"));
+        this.helloChannelId = Long.parseLong(prop.getProperty("helloChannelId"));
+        this.goodbyeChannelId = Long.parseLong(prop.getProperty("goodbyeChannelId"));
         this.discordToken = prop.getProperty("discordToken");
     }
 
-    public long getChannelId() {
-        return channelId;
+    public long getLoadChannelId() {
+        return loadChannelId;
+    }
+    
+    public long getHelloChannelId() {
+        return helloChannelId;
+    }
+    
+    public long getGoodbyeChannelId() {
+        return goodbyeChannelId;
     }
 
     public String getDiscordToken() {
