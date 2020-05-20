@@ -6,18 +6,29 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.MessageDecoration;
 
-import java.io.File;
+import java.io.*;
+import java.util.Properties;
 
 public class cirnonavirusChan {
+    private static final String CIRNONAVIRUS_PROPERTIES_FILE_PATH = "cirnonavirus.properties";
 
         public static void main(String[] args) {
-            // Insert your token token here
-            String token = "token";
+            CirnonavirusChanConfig cirnonavirusChanConfig;
+            try (Reader read = new FileReader(CIRNONAVIRUS_PROPERTIES_FILE_PATH)) {
+                Properties prop = new Properties();
+                prop.load(read);
+                cirnonavirusChanConfig = new CirnonavirusChanConfig(prop);
+            } catch (IOException e) {
+                System.out.println("Unable to initialize Cirnonavirus-Chan. Check properties file at " + CIRNONAVIRUS_PROPERTIES_FILE_PATH);
+                e.printStackTrace();
+                System.exit(1);
+                return;
+            }
 
-            DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
+            DiscordApi api = new DiscordApiBuilder().setToken(cirnonavirusChanConfig.getDiscordToken()).login().join();
 
             //Boot up message, replace 'id' with the channel ID you want the message to be sent to. Replace :baka: emoji with your own. You can get an emoji's ID by typing \:emoji:
-            api.getChannelById(id).ifPresent(channel -> {
+            api.getChannelById(cirnonavirusChanConfig.getChannelId()).ifPresent(channel -> {
                 new MessageBuilder()
                         .append("Cirnonavirus-chan has started in version 9.0.2!", MessageDecoration.BOLD)
                         .append("\n\n")
@@ -221,7 +232,7 @@ public class cirnonavirusChan {
 
                 String mentionTag;
                 mentionTag = event.getUser().getMentionTag();
-                api.getChannelById(id).ifPresent(channel -> {
+                api.getChannelById(cirnonavirusChanConfig.getChannelId()).ifPresent(channel -> {
                     new MessageBuilder()
                             .append("Welcome " + mentionTag + "! Enjoy your stay. <:hikkawaka:479146842014089226>")
                             .addAttachment(new File("./images/welcome.mp4"))
@@ -236,7 +247,7 @@ public class cirnonavirusChan {
 
                 String mentionTag;
                 mentionTag = event.getUser().getMentionTag();
-                api.getChannelById(id).ifPresent(channel -> {
+                api.getChannelById(cirnonavirusChanConfig.getChannelId()).ifPresent(channel -> {
                     new MessageBuilder()
                             .append(mentionTag + " has been sacrificed to los tejones. ¡Olé!")
                             .addAttachment(new File("./images/jesse cleaning.gif"))
