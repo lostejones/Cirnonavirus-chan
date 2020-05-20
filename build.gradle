@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+	id 'application'
+	id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+mainClassName = "cirnonavirusChan"
+
+group 'org.example'
+version '9.0.2'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.javacord:javacord:3.0.5'
+}
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
