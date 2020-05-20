@@ -8,6 +8,6 @@ If you wish to host your own copy on Heroku, you will have to build a usable .ja
 
 ./gradlew clean build
 
-If hosting on Heroku, you should then update PROCFILE with the location of your new .jar file.
+If hosting on Heroku, you should then update Procfile with the location of your new .jar file.
 
 This software is licensed to you under the GPLv3 copyleft free software license.
