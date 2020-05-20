@@ -28,7 +28,7 @@ public class cirnonavirusChan {
             DiscordApi api = new DiscordApiBuilder().setToken(cirnonavirusChanConfig.getDiscordToken()).login().join();
 
             //Boot up message, replace 'id' with the channel ID you want the message to be sent to. Replace :baka: emoji with your own. You can get an emoji's ID by typing \:emoji:
-            api.getChannelById(cirnonavirusChanConfig.getChannelId()).ifPresent(channel -> {
+            api.getChannelById(cirnonavirusChanConfig.getLoadChannelId()).ifPresent(channel -> {
                 new MessageBuilder()
                         .append("Cirnonavirus-chan has started in version 9.0.2!", MessageDecoration.BOLD)
                         .append("\n\n")
@@ -232,7 +232,7 @@ public class cirnonavirusChan {
 
                 String mentionTag;
                 mentionTag = event.getUser().getMentionTag();
-                api.getChannelById(cirnonavirusChanConfig.getChannelId()).ifPresent(channel -> {
+                api.getChannelById(cirnonavirusChanConfig.getHelloChannelId()).ifPresent(channel -> {
                     new MessageBuilder()
                             .append("Welcome " + mentionTag + "! Enjoy your stay. <:hikkawaka:479146842014089226>")
                             .addAttachment(new File("./images/welcome.mp4"))
@@ -247,7 +247,7 @@ public class cirnonavirusChan {
 
                 String mentionTag;
                 mentionTag = event.getUser().getMentionTag();
-                api.getChannelById(cirnonavirusChanConfig.getChannelId()).ifPresent(channel -> {
+                api.getChannelById(cirnonavirusChanConfig.getGoodbyeChannelId()).ifPresent(channel -> {
                     new MessageBuilder()
                             .append(mentionTag + " has been sacrificed to los tejones. ¡Olé!")
                             .addAttachment(new File("./images/jesse cleaning.gif"))
