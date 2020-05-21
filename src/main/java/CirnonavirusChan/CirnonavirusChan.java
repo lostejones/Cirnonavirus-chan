@@ -11,6 +11,9 @@ import java.io.*;
 import java.util.Properties;
 
 public class CirnonavirusChan {
+    
+    //If you wish to test this code with your own Discord bot account, be sure to update cirnonavirus.properties with your desired channel IDs and your bot's token.
+    
     private static final String CIRNONAVIRUS_PROPERTIES_FILE_PATH = "./src/main/resources/cirnonavirus.properties";
 
         public static void main(String[] args) {
@@ -28,7 +31,7 @@ public class CirnonavirusChan {
 
             DiscordApi api = new DiscordApiBuilder().setToken(cirnonavirusChanConfig.getDiscordToken()).login().join();
 
-            //Boot up message, replace 'id' with the channel ID you want the message to be sent to. Replace :baka: emoji with your own. You can get an emoji's ID by typing \:emoji:
+            //Boot message. Replace :baka: emoji with your own. You can get an emoji's ID by typing \:emoji:
             api.getChannelById(cirnonavirusChanConfig.getLoadChannelId()).ifPresent(channel -> {
                 new MessageBuilder()
                         .append("Cirnonavirus-chan has started in version 9.0.2!", MessageDecoration.BOLD)
@@ -227,7 +230,7 @@ public class CirnonavirusChan {
 
             });
 
-            //Adds a listener that sends a server join message when someone joins. Replace 'id' with the channel to be used.
+            //Adds a listener that sends a server join message when someone joins.
 
             api.addServerMemberJoinListener(event -> {
 
@@ -242,7 +245,7 @@ public class CirnonavirusChan {
                 });
             });
 
-            //Adds a listener that sends a server leave message when someone joins. Replace 'id' with the channel to be used.
+            //Adds a listener that sends a server leave message when someone joins.
 
             api.addServerMemberLeaveListener(event -> {
 
