@@ -9,11 +9,12 @@ import org.javacord.api.entity.message.MessageDecoration;
 
 import java.io.*;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CirnonavirusChan {
-    
-    //If you wish to test this code with your own Discord bot account, be sure to update cirnonavirus.properties with your desired channel IDs and your bot's token.
-    
+
+    //If you wish to test this bot with your own Discord bot account, make sure to fill out the token and channel ID fields in cirnonavirus.properties.
+
     private static final String CIRNONAVIRUS_PROPERTIES_FILE_PATH = "./src/main/resources/cirnonavirus.properties";
 
         public static void main(String[] args) {
@@ -49,185 +50,160 @@ public class CirnonavirusChan {
             //Creates a listener for the various reaction images and help message
             api.addMessageCreateListener(event -> {
 
-                //poke reaction
+                if (event.getMessage().getAuthor().isRegularUser()) {
 
-                if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/poke")) {
-                    event.getChannel().sendMessage(new File("./images/poke.gif"));
+                    boolean hasHorny = false;
+                    boolean hasBaka = false;
+
+
+                    if (event.getMessage().getContent().toLowerCase().contains("fap") || event.getMessage().getContent().toLowerCase().contains("horny") || event.getMessage().getContent().toLowerCase().contains("horni")) {
+                        hasHorny = true;
+                    }
+
+                    if (event.getMessage().getContent().toLowerCase().contains("baka") || event.getMessage().getContent().toLowerCase().contains("baka")) {
+                        hasBaka = true;
+                    }
+
+                    //poke reaction
+
+                    if (event.getMessage().getContent().equals("/poke")) {
+                        event.getChannel().sendMessage(new File("./images/poke.gif"));
+                    }
+
+                    //dance reaction
+
+                    if (event.getMessage().getContent().equals("/dance")) {
+                        event.getChannel().sendMessage(new File("./images/lizard.gif"));
+                    }
+
+                    //clean reaction
+
+                    if (event.getMessage().getContent().equals("/clean")) {
+                        event.getChannel().sendMessage(new File("./images/clean.gif"));
+                    }
+
+                    //succ reaction
+
+                    if (event.getMessage().getContent().equals("/succ")) {
+                        event.getChannel().sendMessage(new File("./images/succ.gif"));
+                    }
+
+                    //tejones reaction
+
+                    if (event.getMessage().getContent().equals("/tejones")) {
+                        event.getChannel().sendMessage(new File("./images/tejones.gif"));
+                    }
+
+                    //moth reaction
+
+                    if (event.getMessage().getContent().equals("/moth")) {
+                        event.getChannel().sendMessage(new File("./images/moth.png"));
+                    }
+
+                    //cheers reaction
+
+                    if (event.getMessage().getContent().equals("/cheers")) {
+                        event.getChannel().sendMessage(new File("./images/cheers.png"));
+                    }
+
+                    //gitgud reaction
+
+                    if (event.getMessage().getContent().equals("/gitgud")) {
+                        event.getChannel().sendMessage(new File("./images/gitgud.png"));
+                    }
+
+                    //normie reaction
+
+                    if (event.getMessage().getContent().equals("/normie")) {
+                        event.getChannel().sendMessage(new File("./images/normie.png"));
+                    }
+
+                    //capitalism reaction
+
+                    if (event.getMessage().getContent().equals("/capitalism")) {
+                        event.getChannel().sendMessage(new File("./images/capitalism.png"));
+                    }
+
+                    //bounce reaction
+
+                    if (event.getMessage().getContent().equals("/bounce")) {
+                        event.getChannel().sendMessage(new File("./images/bounce.gif"));
+                    }
+
+                    //cool reaction
+
+                    if (event.getMessage().getContent().equals("/cool")) {
+                        event.getChannel().sendMessage(new File("./images/cool.gif"));
+                    }
+
+                    //ping reaction
+
+                    if (event.getMessage().getContent().equals("/ping")) {
+                        event.getChannel().sendMessage(new File("./images/ping.jpg"));
+                    }
+
+                    //trans rights reaction
+
+                    if (event.getMessage().getContent().equals("/transrights")) {
+                        event.getChannel().sendMessage(new File("./images/transrights.png"));
+                    }
+
+                    //Help message. Also note there are custom emojis that you should replace.
+
+                    if (event.getMessage().getContent().equals("/help")) {
+                        new MessageBuilder()
+                                .append("Cirnonavirus-chan Function List", MessageDecoration.BOLD, MessageDecoration.UNDERLINE)
+                                .append("\n\n")
+                                .append("Autoresponds!", MessageDecoration.BOLD)
+                                .append("\n\n")
+                                .append("• Welcomes newcomers and sacrifices normies to los tejones\n")
+                                .append("• Responds to 'baka' in both romanji and hiragana\n")
+                                .append("• Reminds horny people or bakas that she hates them and just wants to read")
+                                .append("\n\n")
+                                .append("Posts reaction images!", MessageDecoration.BOLD)
+                                .append("\n\n")
+                                .append("/bounce: Bouncing moth\n")
+                                .append("/capitalism: What is to be done? \n")
+                                .append("/cheers: 'I'll drink to that bro'\n")
+                                .append("/clean: Jesse Wilson cleaning\n")
+                                .append("/cool: cool\n")
+                                .append("/dance: Dancing gecko\n")
+                                .append("/gitgud: Hornet telling you to git gud\n")
+                                .append("/moth: moth sees you\n")
+                                .append("/normie: Normies don't entry\n")
+                                .append("/ping: The weak should fear the strong\n")
+                                .append("/poke: Get your brain assaulted by Cirno\n")
+                                .append("/succ: Empusa <:succ:510586865057923092>\n")
+                                .append("/tejones: Scene from Tejones de Extremadura IV\n")
+                                .append("/transrights: We say it")
+                                .append("\n\n")
+                                .append("<:baka:609202434660761601>")
+                                .send((TextChannel) event.getChannel());
+                    }
+
+                    //Scold horny bakas
+
+                    if (hasHorny == true && hasBaka == true) {
+                        event.getChannel().sendMessage(new File("./images/hornybakas.png"));
+                    }
+
+                    //Scold horny people
+
+                    if (hasHorny == true && hasBaka == false) {
+                        event.getChannel().sendMessage(new File("./images/hornypeople.png"));
+                    }
+
+                    //Baka
+
+                    if (hasBaka == true && hasHorny == false) {
+                        if (event.getMessage().getContent().toLowerCase().contains("ばか")) {
+                            event.getChannel().sendMessage("ばか");
+                        }
+                        else {
+                            event.getChannel().sendMessage("baka");
+                        }
+                    }
                 }
-
-                //dance reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/dance")) {
-                    event.getChannel().sendMessage(new File("./images/lizard.gif"));
-                }
-
-                //clean reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/clean")) {
-                    event.getChannel().sendMessage(new File("./images/clean.gif"));
-                }
-
-                //succ reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/succ")) {
-                    event.getChannel().sendMessage(new File("./images/succ.gif"));
-                }
-
-                //tejones reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/tejones")) {
-                    event.getChannel().sendMessage(new File("./images/tejones.gif"));
-                }
-
-                //moth reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/moth")) {
-                    event.getChannel().sendMessage(new File("./images/moth.png"));
-                }
-
-                //cheers reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/cheers")) {
-                    event.getChannel().sendMessage(new File("./images/cheers.png"));
-                }
-
-                //gitgud reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/gitgud")) {
-                    event.getChannel().sendMessage(new File("./images/gitgud.png"));
-                }
-
-                //normie reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/normie")) {
-                    event.getChannel().sendMessage(new File("./images/normie.png"));
-                }
-
-                //capitalism reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/capitalism")) {
-                    event.getChannel().sendMessage(new File("./images/capitalism.png"));
-                }
-
-                //bounce reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/bounce")) {
-                    event.getChannel().sendMessage(new File("./images/bounce.gif"));
-                }
-
-                //cool reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/cool")) {
-                    event.getChannel().sendMessage(new File("./images/cool.gif"));
-                }
-
-                //ping reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/ping")) {
-                    event.getChannel().sendMessage(new File("./images/ping.jpg"));
-                }
-
-                //trans rights reaction
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/transrights")) {
-                    event.getChannel().sendMessage(new File("./images/transrights.png"));
-                }
-
-                //Help message. Also note there are custom emojis that you should replace.
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().equals("/help")) {
-                    new MessageBuilder()
-                            .append("Cirnonavirus-chan Function List", MessageDecoration.BOLD, MessageDecoration.UNDERLINE)
-                            .append("\n\n")
-                            .append("Autoresponds!", MessageDecoration.BOLD)
-                            .append("\n\n")
-                            .append("• Welcomes newcomers and sacrifices normies to los tejones\n")
-                            .append("• Responds to 'baka' in both romanji and hiragana\n")
-                            .append("• Reminds horny people or bakas that she hates them and just wants to read")
-                            .append("\n\n")
-                            .append("Posts reaction images!", MessageDecoration.BOLD)
-                            .append("\n\n")
-                            .append("/bounce: Bouncing moth\n")
-                            .append("/capitalism: What is to be done? \n")
-                            .append("/cheers: 'I'll drink to that bro'\n")
-                            .append("/clean: Jesse Wilson cleaning\n")
-                            .append("/cool: cool\n")
-                            .append("/dance: Dancing gecko\n")
-                            .append("/gitgud: Hornet telling you to git gud\n")
-                            .append("/moth: moth sees you\n")
-                            .append("/normie: Normies don't entry\n")
-                            .append("/ping: The weak should fear the strong\n")
-                            .append("/poke: Get your brain assaulted by Cirno\n")
-                            .append("/succ: Empusa <:succ:510586865057923092>\n")
-                            .append("/tejones: Scene from Tejones de Extremadura IV\n")
-                            .append("/transrights: We say it")
-                            .append("\n\n")
-                            .append("<:baka:609202434660761601>")
-                            .send((TextChannel) event.getChannel());
-                }
-
-                //Scold horny bakas
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("fap") && event.getMessage().getContent().toLowerCase().contains("baka")) {
-                    event.getChannel().sendMessage(new File("./images/hornybakas.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horny") && event.getMessage().getContent().toLowerCase().contains("baka")) {
-                    event.getChannel().sendMessage(new File("./images/hornybakas.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horni") && event.getMessage().getContent().toLowerCase().contains("baka")) {
-                    event.getChannel().sendMessage(new File("./images/hornybakas.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("fap") && event.getMessage().getContent().toLowerCase().contains("ばか")) {
-                    event.getChannel().sendMessage(new File("./images/hornybakas.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horny") && event.getMessage().getContent().toLowerCase().contains("ばか")) {
-                    event.getChannel().sendMessage(new File("./images/hornybakas.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horni") && event.getMessage().getContent().toLowerCase().contains("ばか")) {
-                    event.getChannel().sendMessage(new File("./images/hornybakas.png"));
-                }
-
-                //Scold horny people
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horni") && !event.getMessage().getContent().toLowerCase().contains("ばか")) {
-                    event.getChannel().sendMessage(new File("./images/hornypeople.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horni") && !event.getMessage().getContent().toLowerCase().contains("baka")) {
-                    event.getChannel().sendMessage(new File("./images/hornypeople.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horny") && !event.getMessage().getContent().toLowerCase().contains("ばか")) {
-                    event.getChannel().sendMessage(new File("./images/hornypeople.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("horny") && !event.getMessage().getContent().toLowerCase().contains("baka")) {
-                    event.getChannel().sendMessage(new File("./images/hornypeople.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("fap") && !event.getMessage().getContent().toLowerCase().contains("ばか")) {
-                    event.getChannel().sendMessage(new File("./images/hornypeople.png"));
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("fap") && !event.getMessage().getContent().toLowerCase().contains("baka")) {
-                    event.getChannel().sendMessage(new File("./images/hornypeople.png"));
-                }
-
-                //Baka
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("ばか") && !event.getMessage().getContent().toLowerCase().contains("baka") && !event.getMessage().getContent().toLowerCase().contains("horny") && !event.getMessage().getContent().toLowerCase().contains("horni") && !event.getMessage().getContent().toLowerCase().contains("fap") ) {
-                    event.getChannel().sendMessage("ばか");
-                }
-
-                else if (event.getMessage().getAuthor().isRegularUser() && event.getMessage().getContent().toLowerCase().contains("baka") && !event.getMessage().getContent().toLowerCase().contains("ばか") && !event.getMessage().getContent().toLowerCase().contains("fap") && !event.getMessage().getContent().toLowerCase().contains("horny") && !event.getMessage().getContent().toLowerCase().contains("horni") ) {
-                    event.getChannel().sendMessage("baka");
-                }
-
             });
 
             //Adds a listener that sends a server join message when someone joins.
