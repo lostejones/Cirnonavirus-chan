@@ -35,19 +35,23 @@ public class CirnonavirusChan {
             //Boot message. Replace :baka: emoji with your own. You can get an emoji's ID by typing \:emoji:
             api.getChannelById(cirnonavirusChanConfig.getLoadChannelId()).ifPresent(channel -> {
                 new MessageBuilder()
-                        .append("Cirnonavirus-chan has started in version 9.0.2!", MessageDecoration.BOLD)
+                        .append("Cirnonavirus-chan has started in version 9.0.3!", MessageDecoration.BOLD)
                         .append("\n\n")
                         .append("Update notes:", MessageDecoration.BOLD)
                         .append("\n")
-                        .append("• Added additional reactions")
+                        .append("• Now tells you it's time to stop if you're too horny")
                         .append("\n")
-                        .append("• Version number is now 9")
+                        .append("• Added pride reactions")
                         .append("\n\n")
                         .append("<:baka:609202434660761601>")
                         .send((TextChannel) channel);
             });
 
             //Creates a listener for the various reaction images and help message
+
+
+            final AtomicInteger hornyCounter = new AtomicInteger();
+
             api.addMessageCreateListener(event -> {
 
                 if (event.getMessage().getAuthor().isRegularUser()) {
@@ -142,10 +146,40 @@ public class CirnonavirusChan {
                         event.getChannel().sendMessage(new File("./images/ping.jpg"));
                     }
 
+                    //ace rights reaction
+
+                    if (event.getMessage().getContent().equals("/acerights")) {
+                        event.getChannel().sendMessage(new File("./images/ace.png"));
+                    }
+
+                    //bi rights reaction
+
+                    if (event.getMessage().getContent().equals("/birights")) {
+                        event.getChannel().sendMessage(new File("./images/bi.png"));
+                    }
+
+                    //gay rights reaction
+
+                    if (event.getMessage().getContent().equals("/gayrights")) {
+                        event.getChannel().sendMessage(new File("./images/gay.png"));
+                    }
+
+                    //nb rights reaction
+
+                    if (event.getMessage().getContent().equals("/nbrights")) {
+                        event.getChannel().sendMessage(new File("./images/nb.png"));
+                    }
+
+                    //pan rights reaction
+
+                    if (event.getMessage().getContent().equals("/panrights")) {
+                        event.getChannel().sendMessage(new File("./images/pan.png"));
+                    }
+
                     //trans rights reaction
 
                     if (event.getMessage().getContent().equals("/transrights")) {
-                        event.getChannel().sendMessage(new File("./images/transrights.png"));
+                        event.getChannel().sendMessage(new File("./images/trans.png"));
                     }
 
                     //Help message. Also note there are custom emojis that you should replace.
@@ -175,27 +209,44 @@ public class CirnonavirusChan {
                                 .append("/poke: Get your brain assaulted by Cirno\n")
                                 .append("/succ: Empusa <:succ:510586865057923092>\n")
                                 .append("/tejones: Scene from Tejones de Extremadura IV\n")
-                                .append("/transrights: We say it")
+                                .append("/[x]rights: Replace [x] with ace, bi, gay, nb, pan, or trans to get a pride flag.")
                                 .append("\n\n")
                                 .append("<:baka:609202434660761601>")
                                 .send((TextChannel) event.getChannel());
                     }
 
+
                     //Scold horny bakas
 
-                    if (hasHorny == true && hasBaka == true) {
-                        event.getChannel().sendMessage(new File("./images/hornybakas.png"));
+                    if (hasHorny && hasBaka) {
+                        int Counter = hornyCounter.get();
+                        if(Counter < 4) {
+                            event.getChannel().sendMessage(new File("./images/hornybakas.png"));
+                            hornyCounter.getAndIncrement();
+                        }
+                        else {
+                            event.getChannel().sendMessage(new File("./images/timetostopbakas.mp4"));
+                            hornyCounter.set(0);
+                        }
                     }
 
                     //Scold horny people
 
-                    if (hasHorny == true && hasBaka == false) {
-                        event.getChannel().sendMessage(new File("./images/hornypeople.png"));
+                    if (hasHorny && !hasBaka) {
+                        int Counter = hornyCounter.get();
+                        if (Counter < 4) {
+                            event.getChannel().sendMessage(new File("./images/hornypeople.png"));
+                            hornyCounter.getAndIncrement();
+                        }
+                        else {
+                            event.getChannel().sendMessage(new File("./images/timetostoppeople.mp4"));
+                            hornyCounter.set(0);
+                        }
                     }
 
                     //Baka
 
-                    if (hasBaka == true && hasHorny == false) {
+                    if (hasBaka && !hasHorny) {
                         if (event.getMessage().getContent().toLowerCase().contains("ばか")) {
                             event.getChannel().sendMessage("ばか");
                         }
