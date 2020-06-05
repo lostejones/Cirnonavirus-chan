@@ -4,7 +4,7 @@ plugins {
 	id 'com.github.johnrengelman.shadow' version '5.2.0'
 }
 
-mainClassName = "CirnonavirusChan"
+mainClassName = "CirnonavirusChan.CirnonavirusChan"
 
 group 'org.example'
 version '9.0.2'
