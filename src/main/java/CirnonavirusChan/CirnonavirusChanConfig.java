@@ -1,4 +1,4 @@
-package cirnonavirusChan;
+package CirnonavirusChan;
 
 import java.util.Properties;
 
