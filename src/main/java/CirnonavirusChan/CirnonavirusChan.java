@@ -206,6 +206,12 @@ public class CirnonavirusChan {
                     event.getChannel().sendMessage(new File("./images/trans.png"));
                 }
 
+                // ranch reaction
+
+                if (event.getMessage().getContent().equals("/ranch")) {
+                    event.getChannel().sendMessage(new File("./images/ranch.png"));
+                }
+
                 //Help message. Also note there are custom emojis that you should replace.
 
                 if (event.getMessage().getContent().equals("/help")) {
